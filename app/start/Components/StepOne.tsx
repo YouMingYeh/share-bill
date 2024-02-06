@@ -26,17 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { Button } from "@/components/ui/button";
 import { submitCreateGroupForm } from "../actions";
-
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export const StepOne = () => {
   const { pending } = useFormStatus();
@@ -95,13 +85,7 @@ export const StepOne = () => {
               <Button variant={"secondary"} formAction={handleCancel}>
                 清除
               </Button>
-              <Button type="submit" disabled={pending}>
-                {pending ? (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  "完成"
-                )}
-              </Button>
+              <SubmitButton label="完成" />
             </div>
           </form>
         </CardContent>
