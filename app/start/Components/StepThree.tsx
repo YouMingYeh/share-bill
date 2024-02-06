@@ -133,6 +133,10 @@ const CardTwo = async ({
 
     const response = await createGroupHasUser(group_has_user);
 
+    if (!response) {
+      throw new Error("你可能還沒創建群組");
+    }
+
     if (response?.error) {
       throw new Error(response.error.toString());
     }

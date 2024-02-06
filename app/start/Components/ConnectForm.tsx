@@ -88,8 +88,12 @@ export async function ConnectForm({
     };
 
     const response = await createUserConnectsGroup(user_connects_group);
+    if (!response) {
+      throw new Error("你可能沒有權限或是還沒創建群組");
+    }
+
     if (response?.error) {
-      throw new Error("Error creating user connects group");
+      throw new Error(response.error.toString());
     }
     redirect(
       `/start?step=${Number(searchParams.step) + 1}&groupid=${searchParams.groupid}`,

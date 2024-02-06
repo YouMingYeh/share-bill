@@ -67,7 +67,7 @@ import {
 import { defaultUrl, translateType } from "@/lib/utils";
 
 async function MyTabs({ profile }: { profile: Profile }) {
-  const response = (await getUserConnectsGroupByUserId(profile?.id)) as any;
+  const response = await getUserConnectsGroupByUserId(profile?.id);
 
   async function submit(formData: FormData) {
     "use server";
@@ -80,6 +80,9 @@ async function MyTabs({ profile }: { profile: Profile }) {
       picture_url: picture_url as string,
     };
     const response = await updateProfile(profileToUpdate);
+    if (!response) {
+      throw new Error("更新失敗，請再試一次");
+    }
     if (response?.error) {
       throw new Error(response.error.message);
     }
@@ -139,7 +142,7 @@ async function MyTabs({ profile }: { profile: Profile }) {
           <CardContent className="space-y-2">
             <Carousel>
               <CarouselContent>
-                {response?.data.map((record: any) => {
+                {response?.data?.map((record: any) => {
                   return (
                     <CarouselItem key={record.group.id}>
                       <GroupItem
