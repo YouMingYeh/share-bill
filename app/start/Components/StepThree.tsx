@@ -39,7 +39,7 @@ import { revalidatePath } from "next/cache";
 import { toast } from "react-hot-toast";
 import { ConnectForm } from "./ConnectForm";
 import { metadata } from "@/app/layout";
-import { defaultUrl } from "@/lib/utils";
+import { defaultUrl, isStringDefined } from "@/lib/utils";
 
 export async function StepThree({
   searchParams,
@@ -59,8 +59,8 @@ function CarouselDemo({
   searchParams: { step: string; groupid: string | undefined };
 }) {
   return (
-    <Carousel className="w-full max-w-xs ">
-      <CarouselContent className="w-full">
+    <Carousel className="w-full max-w-xs justify-center items-center">
+      <CarouselContent className="w-full items-center p-0">
         <CarouselItem className=" flex flex-col justify-center">
           <div className=" flex justify-center ">
             <CardOne searchParams={searchParams} />
@@ -89,10 +89,14 @@ const CardOne = ({
   searchParams: { step: string; groupid: string | undefined };
 }) => {
   return (
-    <Card className=" ">
+    <Card className="items-center">
       <CardContent className="w-full h-full flex flex-col justify-center items-center align-middle gap-4 p-6 aspect-square">
         <CardTitle>首先，分享群組連結給朋友吧</CardTitle>
-        <CardDescription>你的朋友可以透過連結加入群組</CardDescription>
+        <CardDescription>
+          {isStringDefined(searchParams?.groupid)
+            ? "你的朋友可以透過連結加入群組"
+            : "但你好似乎好像還沒有創建群組呢...，你可以回到上一步再試一次。"}
+        </CardDescription>
         <div className="h-auto flex align-middle gap-4">
           <ShareButton
             label="分享群組連結"
@@ -130,7 +134,7 @@ const CardTwo = async ({
     const response = await createGroupHasUser(group_has_user);
 
     if (response?.error) {
-      console.error(response.error);
+      throw new Error(response.error.toString());
     }
 
     revalidatePath(`/group/${searchParams?.groupid}`);

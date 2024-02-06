@@ -38,3 +38,5 @@ type UserConnectsGroup = {
   group_id: string;
   user_id: string;
 };
+
+type UndefinedOrNull = undefined | null | "undefined" | "null";

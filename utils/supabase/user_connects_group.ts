@@ -1,9 +1,10 @@
+import { isStringDefined } from "@/lib/utils";
 import { createClient } from "./server";
 import { cookies } from "next/headers";
 
 export const getUserConnectsGroupByUserId = async (user_id: string) => {
-  if (!user_id) {
-    return [];
+  if (!isStringDefined(user_id)) {
+    return null;
   }
   ("use server");
   const cookieStore = cookies();
@@ -49,8 +50,8 @@ export const createUserConnectsGroup = async (
 };
 
 export const getUserConnectsGroup = async (group_id: string | undefined) => {
-  if (group_id === "undefined" || !group_id) {
-    return [];
+  if (!isStringDefined(group_id)) {
+    return null;
   }
   ("use server");
   const cookieStore = cookies();

@@ -1,8 +1,10 @@
+import { type } from "os";
 import { createClient } from "./server";
 import { cookies } from "next/headers";
+import { isStringDefined } from "@/lib/utils";
 
 export const getGroupHasUser = async (group_id: string | undefined) => {
-  if (group_id === "undefined" || !group_id) {
+  if (!isStringDefined(group_id)) {
     return [];
   }
   ("use server");
@@ -23,7 +25,7 @@ export const getGroupHasUser = async (group_id: string | undefined) => {
 export const createGroupHasUser = async (
   group_has_user: GroupHasUserCreate,
 ) => {
-  if (!group_has_user.group_id) {
+  if (!isStringDefined(group_has_user.group_id)) {
     return;
   }
   ("use server");

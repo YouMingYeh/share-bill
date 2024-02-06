@@ -36,7 +36,7 @@ export async function ConnectForm({
   const user_connects_group = await getUserConnectsGroup(searchParams?.groupid);
 
   let connected = false;
-  if (user_connects_group?.length > 0) {
+  if (user_connects_group && user_connects_group?.length > 0) {
     user_connects_group.forEach((user_connects_group) => {
       if (user?.id === user_connects_group.user_id) {
         connected = true;
@@ -90,7 +90,6 @@ export async function ConnectForm({
     const response = await createUserConnectsGroup(user_connects_group);
     if (response?.error) {
       throw new Error("Error creating user connects group");
-      return;
     }
     redirect(
       `/start?step=${Number(searchParams.step) + 1}&groupid=${searchParams.groupid}`,

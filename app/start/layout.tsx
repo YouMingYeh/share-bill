@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const previousHerf = `/start?step=${Number(searchParams.get("step")) - 1}&groupid=${searchParams.get("groupid")}`;
   const nextHerf = `/start?step=${Number(searchParams.get("step")) + 1}&groupid=${searchParams.get("groupid")}`;
   return (
-    <div className="flex-1 flex flex-col w-full px-8 justify-center">
+    <div className="flex-1 flex flex-col w-full px-8 justify-center items-center">
       <PreviousPage
         href={Number(searchParams.get("step")) > 1 ? previousHerf : "/"}
         label="上一步"

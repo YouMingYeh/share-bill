@@ -20,31 +20,30 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getGroup } from "@/utils/supabase/group";
 import { Separator } from "@/components/ui/separator";
 import CopyToClipBoardButton from "@/components/CopyToClipBoardButton";
-import { translateType } from "@/lib/utils";
+import { isStringDefined, translateType } from "@/lib/utils";
 
 export async function StepTwo({
   searchParams,
 }: {
   searchParams: { step: string; groupid: string | undefined };
 }) {
-  let group = null;
-  if (searchParams.groupid) {
-    group = await getGroup(searchParams.groupid);
-  }
+  const group = await getGroup(searchParams?.groupid as string);
+
+  const groupIdExists = isStringDefined(searchParams?.groupid);
   return (
     <div className="flex flex-col flex-1 justify-center items-center gap-10">
       <Alert className="h-32">
         <RocketIcon className="h-4 w-4" />
         <AlertTitle className="text-2xl">
-          {searchParams.groupid ? "群組創建成功！" : "Oops, 你好像沒有創建群組"}
+          {groupIdExists ? "群組創建成功！" : "Oops, 你好像沒有創建群組"}
         </AlertTitle>
         <AlertDescription className="text-md">
-          {searchParams.groupid
+          {groupIdExists
             ? "你已經成功創建了一個新的群組。點開下方的按鈕，查看詳細資訊。\n若要繼續教學，請點擊下一步。"
-            : "沒關係，你可以再試一次或繼續下一步教學。"}
+            : "沒關係，你可以再試一次或選擇直接使用連結加入別人的群組。"}
         </AlertDescription>
       </Alert>
-      {searchParams.groupid && (
+      {groupIdExists && (
         <Drawer>
           <DrawerTrigger asChild>
             <Button variant="outline">查看詳細資訊</Button>

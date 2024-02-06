@@ -25,3 +25,13 @@ export function translateType(type: string) {
 export const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
+
+export function isStringDefined(str: string | undefined | null): boolean {
+  if (str === undefined || str === null) {
+    return false;
+  }
+  if (str === "undefined" || str === "null") {
+    return false;
+  }
+  return true;
+}

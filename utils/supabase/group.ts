@@ -1,8 +1,13 @@
+import { isStringDefined } from "@/lib/utils";
 import { createClient } from "./server";
 import { cookies } from "next/headers";
 
 export const getGroup = async (id: string) => {
-  "use server";
+  if (!isStringDefined(id)) {
+    return null;
+  }
+
+  ("use server");
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 

@@ -1,9 +1,13 @@
+import { isStringDefined } from "@/lib/utils";
 import { createClient } from "./server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const getProfile = async (id: string) => {
   "use server";
+  if (!isStringDefined(id)) {
+    return null;
+  }
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
