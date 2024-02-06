@@ -18,10 +18,10 @@ export default async function Index() {
         </h1>
         <h2 className="text-md text-center">會私底下再算錢</h2>
         <div className="flex justify-center gap-3 p-4">
-          <Button variant={"secondary"} size={"lg"}>
+          <Button asChild variant={"secondary"} size={"lg"}>
             <Link href={"/login"}>登入</Link>
           </Button>
-          <Button variant={"default"} size={"lg"}>
+          <Button variant={"default"} asChild size={"lg"}>
             <Link href={"/start"}>直接開始</Link>
           </Button>
         </div>

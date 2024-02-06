@@ -17,12 +17,19 @@ import { RocketIcon } from "@radix-ui/react-icons";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
+import { getGroup } from "@/utils/supabase/group";
+import { Separator } from "@/components/ui/separator";
+import CopyToClipBoardButton from "@/components/CopyToClipBoardButton";
+
 export async function StepTwo({
   searchParams,
 }: {
   searchParams: { step: string; groupid: string | undefined };
 }) {
-  console.log(searchParams);
+  let group = null;
+  if (searchParams.groupid) {
+    group = await getGroup(searchParams.groupid);
+  }
   return (
     <div className="flex flex-col flex-1 justify-center items-center gap-10">
       <Alert className="h-32">
@@ -45,12 +52,32 @@ export async function StepTwo({
             <div className="mx-auto w-full max-w-sm">
               <DrawerHeader>
                 <DrawerTitle>群組資訊</DrawerTitle>
+
                 <DrawerDescription>
                   你剛剛創建了一個新的群組，你可以透過連結邀請朋友加入。
                 </DrawerDescription>
+                <Separator />
+                {group ? (
+                  <DrawerDescription>
+                    <h2 className="text-xl">群組名稱: {group.name}</h2>
+                    <h2 className="text-xl">群組描述: {group.description}</h2>
+                    <h2 className="text-xl">
+                      群組類型: {translateType(group.type)}
+                    </h2>
+
+                    <h2 className="text-xl">
+                      複製群組連結{" "}
+                      <CopyToClipBoardButton
+                        url={`share-bill-zeta.vercel.app/group/${group.id}`}
+                      />
+                    </h2>
+                  </DrawerDescription>
+                ) : (
+                  <></>
+                )}
               </DrawerHeader>
               <DrawerFooter>
-                <Button>
+                <Button asChild>
                   <Link href={`/group/${searchParams?.groupid}`}>
                     直接進入群組
                   </Link>
@@ -63,9 +90,28 @@ export async function StepTwo({
           </DrawerContent>
         </Drawer>
       )}
-      <Button>
-        <Link href="start?step=3">下一步</Link>
+      <Button asChild>
+        <Link href={`start?step=3&groupid=${searchParams.groupid}`}>
+          下一步
+        </Link>
       </Button>
     </div>
   );
+}
+
+function translateType(type: string) {
+  switch (type) {
+    case "normal":
+      return "一般";
+    case "food":
+      return "吃飯";
+    case "casual":
+      return "休閒";
+    case "trip":
+      return "旅遊";
+    case "other":
+      return "其他";
+    default:
+      return "一般";
+  }
 }

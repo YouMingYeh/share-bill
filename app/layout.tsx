@@ -29,7 +29,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="absolute bottom-1 left-1 m-1 flex flex-col gap-1">
+          <div className="fixed bottom-1 left-1 m-1 flex flex-col gap-1">
             <Hint />
             <ModeToggle />
           </div>

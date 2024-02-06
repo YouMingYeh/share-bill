@@ -22,6 +22,5 @@ export async function submitCreateGroupForm(formData: FormData) {
 
   const data = await createGroup(group);
 
-  redirect("/start?step=2");
-  return data;
+  redirect(`/start?step=2&groupid=${data.id}`);
 }

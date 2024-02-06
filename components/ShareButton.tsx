@@ -41,7 +41,7 @@ export function ShareButton({
   };
 
   return (
-    <Button onClick={handleShare} disabled={pending}>
+    <Button variant={"outline"} onClick={handleShare} disabled={pending}>
       {pending ? <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> : label}
     </Button>
   );

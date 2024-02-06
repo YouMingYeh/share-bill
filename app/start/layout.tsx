@@ -8,20 +8,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if (!searchParams.get("step") || Number(searchParams.get("step")) < 1) {
     redirect("/start?step=1");
   }
+  const previousHerf = `/start?step=${Number(searchParams.get("step")) - 1}&groupid=${searchParams.get("groupid")}`;
+  const nextHerf = `/start?step=${Number(searchParams.get("step")) + 1}&groupid=${searchParams.get("groupid")}`;
   return (
-    <div className="flex-1 flex flex-col w-full px-8 justify-center gap-2">
+    <div className="flex-1 flex flex-col w-full px-8 justify-center">
       <PreviousPage
-        href={
-          Number(searchParams.get("step")) > 1
-            ? `/start?step=${Number(searchParams.get("step")) - 1}`
-            : "/"
-        }
+        href={Number(searchParams.get("step")) > 1 ? previousHerf : "/"}
         label="上一步"
       />
-      <NextPage
-        href={`/start?step=${Number(searchParams.get("step")) + 1}`}
-        label="跳過"
-      />
+      {Number(searchParams.get("step")) < 4 && (
+        <NextPage href={nextHerf} label="跳過" />
+      )}
 
       {children}
     </div>

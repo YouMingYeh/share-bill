@@ -1,8 +1,7 @@
 import { createClient } from "./server";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-export const gerGroup = async (id: string) => {
+export const getGroup = async (id: string) => {
   "use server";
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
@@ -10,9 +9,8 @@ export const gerGroup = async (id: string) => {
   const { data, error } = await supabase.from("group").select().eq("id", id);
 
   if (error) {
-    throw new Error("Failed to fetch profile");
+    throw new Error("Failed to fetch group data");
   }
-
   return data[0];
 };
 

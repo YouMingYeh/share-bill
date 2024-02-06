@@ -25,7 +25,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 import { Button } from "@/components/ui/button";
-import { submitCreateGroupForm } from "./actions";
+import { submitCreateGroupForm } from "../actions";
 
 import {
   Drawer,

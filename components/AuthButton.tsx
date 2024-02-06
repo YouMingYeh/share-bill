@@ -14,7 +14,6 @@ export default async function AuthButton() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user", user);
   const profile: any = user ? await getProfile(user?.id) : {};
 
   return user ? (
@@ -25,7 +24,7 @@ export default async function AuthButton() {
       </form>
     </div>
   ) : (
-    <Button variant={"outline"}>
+    <Button asChild variant={"outline"}>
       <Link href="/login" className="no-underline text-foreground">
         Login
       </Link>

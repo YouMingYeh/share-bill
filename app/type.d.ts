@@ -12,3 +12,22 @@ type Group = {
   description: string;
   type: string;
 };
+
+type GroupHasUserCreate = {
+  group_id: string;
+  username: string;
+  is_owner: boolean;
+};
+
+type GroupHasUser = {
+  id: string;
+  group_id: string;
+  username: string;
+  is_owner: boolean;
+};
+
+type UserConnectsGroup = {
+  group_has_user_id: string;
+  group_id: string;
+  user_id: string;
+};
