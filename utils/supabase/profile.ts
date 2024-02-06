@@ -32,3 +32,18 @@ export const createProfile = async (profile: Profile) => {
 
   return data[0];
 };
+
+export const updateProfile = async (profile: ProfileUpdate) => {
+  "use server";
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase
+    .from("profile")
+    .update(profile)
+    .eq("id", profile.id);
+
+  console.log(data);
+
+  return { data, error };
+};

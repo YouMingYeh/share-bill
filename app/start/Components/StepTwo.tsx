@@ -20,6 +20,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getGroup } from "@/utils/supabase/group";
 import { Separator } from "@/components/ui/separator";
 import CopyToClipBoardButton from "@/components/CopyToClipBoardButton";
+import { translateType } from "@/lib/utils";
 
 export async function StepTwo({
   searchParams,
@@ -97,21 +98,4 @@ export async function StepTwo({
       </Button>
     </div>
   );
-}
-
-function translateType(type: string) {
-  switch (type) {
-    case "normal":
-      return "一般";
-    case "food":
-      return "吃飯";
-    case "casual":
-      return "休閒";
-    case "trip":
-      return "旅遊";
-    case "other":
-      return "其他";
-    default:
-      return "一般";
-  }
 }

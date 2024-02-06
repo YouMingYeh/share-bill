@@ -82,7 +82,7 @@ export async function ConnectForm({
     }
 
     const user_connects_group: UserConnectsGroup = {
-      group_has_user_id: group_has_user_id,
+      id: group_has_user_id,
       user_id: user?.id,
       group_id: searchParams?.groupid,
     };

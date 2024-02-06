@@ -81,11 +81,14 @@ function CarouselDemo({
   );
 }
 
+import { headers } from "next/headers";
+
 const CardOne = ({
   searchParams,
 }: {
   searchParams: { step: string; groupid: string | undefined };
 }) => {
+  const origin = headers().get("origin");
   return (
     <Card className=" ">
       <CardContent className="w-full h-full flex flex-col justify-center items-center align-middle gap-4 p-6 aspect-square">
@@ -94,11 +97,9 @@ const CardOne = ({
         <div className="h-auto flex align-middle gap-4">
           <ShareButton
             label="分享群組連結"
-            urlToShare={`https://share-bill-zeta.vercel.app/group/${searchParams?.groupid}`}
+            urlToShare={`${origin}/${searchParams?.groupid}`}
           />
-          <CopyToClipBoardButton
-            url={`https://share-bill-zeta.vercel.app/group/${searchParams?.groupid}`}
-          />
+          <CopyToClipBoardButton url={`${origin}/${searchParams?.groupid}`} />
         </div>
       </CardContent>
     </Card>

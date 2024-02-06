@@ -6,6 +6,12 @@ type Profile = {
   email: string;
 };
 
+type ProfileUpdate = {
+  id: string;
+  username: string;
+  picture_url: string | null;
+};
+
 type Group = {
   id: string;
   name: string;
@@ -28,7 +34,7 @@ type GroupHasUser = {
 };
 
 type UserConnectsGroup = {
-  group_has_user_id: string;
+  id: string;
   group_id: string;
   user_id: string;
 };
