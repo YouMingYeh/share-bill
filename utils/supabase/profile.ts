@@ -43,7 +43,5 @@ export const updateProfile = async (profile: ProfileUpdate) => {
     .update(profile)
     .eq("id", profile.id);
 
-  console.log(data);
-
   return { data, error };
 };

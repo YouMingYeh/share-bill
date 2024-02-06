@@ -38,6 +38,8 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { toast } from "react-hot-toast";
 import { ConnectForm } from "./ConnectForm";
+import { metadata } from "@/app/layout";
+import { defaultUrl } from "@/lib/utils";
 
 export async function StepThree({
   searchParams,
@@ -81,14 +83,11 @@ function CarouselDemo({
   );
 }
 
-import { headers } from "next/headers";
-
 const CardOne = ({
   searchParams,
 }: {
   searchParams: { step: string; groupid: string | undefined };
 }) => {
-  const origin = headers().get("origin");
   return (
     <Card className=" ">
       <CardContent className="w-full h-full flex flex-col justify-center items-center align-middle gap-4 p-6 aspect-square">
@@ -97,9 +96,11 @@ const CardOne = ({
         <div className="h-auto flex align-middle gap-4">
           <ShareButton
             label="分享群組連結"
-            urlToShare={`${origin}/${searchParams?.groupid}`}
+            urlToShare={`${defaultUrl}/${searchParams?.groupid}`}
           />
-          <CopyToClipBoardButton url={`${origin}/${searchParams?.groupid}`} />
+          <CopyToClipBoardButton
+            url={`${defaultUrl}/${searchParams?.groupid}`}
+          />
         </div>
       </CardContent>
     </Card>
@@ -125,7 +126,6 @@ const CardTwo = async ({
       is_owner: is_owner === "on" ? true : false,
       username: username as string,
     };
-    console.log(group_has_user);
 
     const response = await createGroupHasUser(group_has_user);
 

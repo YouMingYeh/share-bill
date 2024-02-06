@@ -64,12 +64,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { translateType } from "@/lib/utils";
+import { defaultUrl, translateType } from "@/lib/utils";
 
 async function MyTabs({ profile }: { profile: Profile }) {
   const response = (await getUserConnectsGroupByUserId(profile?.id)) as any;
-
-  console.log(response?.data);
 
   async function submit(formData: FormData) {
     "use server";
@@ -178,7 +176,6 @@ const GroupItem = ({
   type: string;
   description: string;
 }) => {
-  const origin = headers().get("origin");
   return (
     <Card>
       <CardHeader>
@@ -194,7 +191,7 @@ const GroupItem = ({
         </div>
 
         <div className="absolute right-1 top-1">
-          <CopyToClipBoardButton url={`${origin}/group/${id}`} />
+          <CopyToClipBoardButton url={`${defaultUrl}/group/${id}`} />
         </div>
       </CardContent>
     </Card>

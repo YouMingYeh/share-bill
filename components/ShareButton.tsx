@@ -14,7 +14,6 @@ export function ShareButton({
   const [pending, setPending] = useState<boolean>(false);
 
   const handleShare = async () => {
-    console.log("handleShare");
     setPending(true);
     if (navigator.share) {
       try {
@@ -28,10 +27,8 @@ export function ShareButton({
         setPending(false);
       }
     } else {
-      console.log("Web Share API is not supported in your browser");
       try {
         await navigator.clipboard.writeText(urlToShare);
-        console.log("URL copied to clipboard");
         setPending(false);
       } catch (err) {
         console.error("Failed to copy: ", err);

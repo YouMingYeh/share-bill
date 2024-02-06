@@ -92,7 +92,6 @@ export async function ConnectForm({
       throw new Error("Error creating user connects group");
       return;
     }
-    console.log("User connected to group");
     redirect(
       `/start?step=${Number(searchParams.step) + 1}&groupid=${searchParams.groupid}`,
     );

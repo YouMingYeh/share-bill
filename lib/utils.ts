@@ -21,3 +21,7 @@ export function translateType(type: string) {
       return "一般";
   }
 }
+
+export const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
