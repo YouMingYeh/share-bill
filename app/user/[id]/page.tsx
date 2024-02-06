@@ -66,7 +66,7 @@ import {
 } from "@/components/ui/carousel";
 import { translateType } from "@/lib/utils";
 
-export async function MyTabs({ profile }: { profile: Profile }) {
+async function MyTabs({ profile }: { profile: Profile }) {
   const response = (await getUserConnectsGroupByUserId(profile?.id)) as any;
 
   console.log(response?.data);
