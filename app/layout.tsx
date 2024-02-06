@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground screen h-screen w-screen flex-1 flex flex-col align-middle justify-center items-center">
+      <body className="bg-background text-foreground h-screen w-screen flex-1 flex flex-col align-middle justify-center items-center">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -33,8 +33,9 @@ export default function RootLayout({
             <Hint />
             <ModeToggle />
           </div>
-
-          {children}
+          <div className="h-screen flex justify-center align-middle items-center">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

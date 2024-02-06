@@ -6,6 +6,7 @@ import { RocketIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { signIn } from "@/utils/supabase/auth";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default function Login({
   searchParams,
@@ -59,7 +60,8 @@ export default function Login({
           placeholder="••••••••"
           required
         />
-        <Button variant={"default"}>登入</Button>
+        <SubmitButton label={"登入"} />
+
         <blockquote className="mt-6 border-l-2 pl-6">
           <span className="italic">還沒有帳號嗎？ </span>
           <Link
