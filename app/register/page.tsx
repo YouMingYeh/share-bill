@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
-import { RocketIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { SubmitButton } from "@/components/SubmitButton";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+
+import { signUp } from "@/utils/supabase/auth";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
-import { signIn } from "@/utils/supabase/auth";
 
 export default function Login({
   searchParams,
@@ -36,10 +36,20 @@ export default function Login({
       </Link>
 
       <form
-        className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground align-middle"
-        action={signIn}
+        className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+        action={signUp}
       >
-        <h1 className="text-3xl font-bold text-center">登入</h1>
+        <h1 className="text-3xl font-bold text-center">註冊</h1>
+        <label className="text-md" htmlFor="name">
+          姓名
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="name"
+          placeholder="姓名"
+          required
+        />
+
         <label className="text-md" htmlFor="email">
           電子郵件
         </label>
@@ -58,29 +68,26 @@ export default function Login({
           name="password"
           placeholder="••••••••"
           required
+          minLength={6}
         />
-        <Button variant={"default"}>登入</Button>
+        <SubmitButton label={"註冊"} />
         <blockquote className="mt-6 border-l-2 pl-6">
-          <span className="italic">還沒有帳號嗎？ </span>
+          <span className="italic">已經有帳號了嗎？ </span>
           <Link
-            href="/register"
+            href="/login"
             className="no-underline text-foreground font-bold hover:underline "
           >
-            點我註冊
+            點我登入
           </Link>
         </blockquote>
-        {searchParams?.message == "success" && (
-          <Alert variant="default">
-            <RocketIcon className="h-4 w-4" />
-            <AlertTitle>註冊成功！</AlertTitle>
-            <AlertDescription> 請繼續登入。</AlertDescription>
-          </Alert>
-        )}
+
         {searchParams?.message == "failed" && (
           <Alert variant="destructive">
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>錯誤！</AlertTitle>
-            <AlertDescription> 請檢查您的電子郵件和密碼。</AlertDescription>
+            <AlertDescription>
+              註冊失敗！ 可能是因為該電子郵件不正確或已經被註冊過了。
+            </AlertDescription>
           </Alert>
         )}
       </form>
