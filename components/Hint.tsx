@@ -23,7 +23,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
+import {
+  EnvelopeClosedIcon,
+  GitHubLogoIcon,
+  PersonIcon,
+  QuestionMarkCircledIcon,
+} from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export function Hint() {
   const [open, setOpen] = React.useState(false);
@@ -52,6 +58,25 @@ export function Hint() {
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="pt-2">
+          <DrawerTitle>Contact me</DrawerTitle>
+          <DrawerDescription>
+            <Link href="https://github.com/YouMingYeh" className={"underline"}>
+              <div className="flex align-middl gap-1">
+                <GitHubLogoIcon />
+                @YouMingYeh
+              </div>
+            </Link>
+            <Link href="https://yehyouming.vercel.app" className={"underline"}>
+              <div className="flex align-middle gap-1">
+                <PersonIcon />
+                My Portfolio
+              </div>
+            </Link>
+            <div className="flex align-middle gap-1">
+              <EnvelopeClosedIcon />
+              b10705052@ntu.edu.tw
+            </div>
+          </DrawerDescription>
           <DrawerClose asChild>
             <Button variant="outline">取消</Button>
           </DrawerClose>
