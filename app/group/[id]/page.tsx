@@ -1,8 +1,3 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
-import { RocketIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
-
 export default function Group({ params }: { params: { id: string } }) {
   const { id } = params;
   return (
