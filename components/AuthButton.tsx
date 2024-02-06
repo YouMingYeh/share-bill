@@ -19,10 +19,17 @@ export default async function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-1 flex-col">
-      <Avatar>
-        <AvatarImage src={profile?.picture_url} alt={profile?.username} />
-        <AvatarFallback>{profile?.username}</AvatarFallback>
-      </Avatar>
+      <Link href={`/user/${user?.id}`}>
+        <Avatar>
+          <AvatarImage
+            src={profile?.picture_url}
+            alt={(profile?.username as string).substring(0, 2)}
+          />
+          <AvatarFallback>
+            {(profile?.username as string).substring(0, 2)}
+          </AvatarFallback>
+        </Avatar>
+      </Link>
       <form action={signOut}>
         <Button variant="outline" size="icon">
           <ExitIcon />

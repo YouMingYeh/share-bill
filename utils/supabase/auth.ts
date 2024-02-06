@@ -26,6 +26,7 @@ export const signUp = async (formData: FormData) => {
     username: name,
     picture_url: null,
     created_at: user?.created_at as string,
+    email: user?.email as string,
   };
 
   let profileData = await createProfile(profile);

@@ -48,6 +48,7 @@ export default function Login({
           name="name"
           placeholder="姓名"
           required
+          minLength={2}
         />
 
         <label className="text-md" htmlFor="email">

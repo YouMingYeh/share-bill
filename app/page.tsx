@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 
 export default async function Index() {
   return (
-    <div className="bg-background text-foreground w-full  flex align-middle justify-center ">
-      <div>
+    <div className="bg-background text-foreground w-full  flex align-middle justify-center items-center">
+      <div className="flex flex-col items-center">
         <Avatar className="w-64 h-64">
           <AvatarImage src="/logo.png" />
           <AvatarFallback>Share Bill</AvatarFallback>
