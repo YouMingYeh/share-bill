@@ -84,7 +84,7 @@ export async function ConnectForm({
     }
 
     const user_connects_group: UserConnectsGroup = {
-      id: group_has_user_id,
+      group_has_user_id: group_has_user_id,
       user_id: user?.id,
       group_id: searchParams?.groupid,
     };
@@ -95,6 +95,7 @@ export async function ConnectForm({
     }
 
     if (response?.error) {
+      console.log(response.error);
       throw new Error(response.error.toString());
     }
     redirect(

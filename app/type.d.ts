@@ -31,10 +31,11 @@ type GroupHasUser = {
   group_id: string;
   username: string;
   is_owner: boolean;
+  balance: number;
 };
 
 type UserConnectsGroup = {
-  id: string;
+  group_has_user_id: string;
   group_id: string;
   user_id: string;
 };

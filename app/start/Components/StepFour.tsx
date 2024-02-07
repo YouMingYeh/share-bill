@@ -15,7 +15,7 @@ export async function StepFour({
 
   return (
     <div className="flex flex-col flex-1 justify-center items-center gap-10">
-      <Alert className="h-32">
+      <Alert className="h-fit">
         <RocketIcon className="h-4 w-4" />
         <AlertTitle className="text-2xl">
           {groupIdExists ? "準備進入群組" : "Oops, 你好像沒有創建群組"}

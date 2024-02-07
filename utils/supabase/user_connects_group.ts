@@ -20,7 +20,7 @@ export const getUserConnectsGroupByUserId = async (user_id: string) => {
     .from("user_connects_group")
     .select(
       `
-    id,
+    group_has_user_id,
     user_id,
     group (id, name, description, type)
   `,
@@ -32,6 +32,38 @@ export const getUserConnectsGroupByUserId = async (user_id: string) => {
   }
 
   return { data, error };
+};
+
+export const getUserConnectsGroupByGroupId = async (group_id: string) => {
+  if (!isStringDefined(group_id)) {
+    return null;
+  }
+  ("use server");
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  //   SELECT
+  //   group_id, description, name, type
+  // FROM
+  //   profile AS p
+  //   JOIN user_connects_group AS ucg On p.id = ucg.user_id
+  //   JOIN public.group AS g ON ucg.group_id = g.id
+  const { data, error } = await supabase
+    .from("user_connects_group")
+    .select(
+      `
+    group_has_user_id,
+    profile (id, email, username, picture_url ),
+    group_id
+  `,
+    )
+    .eq("group_id", group_id);
+
+  if (error) {
+    console.error("Failed to fetch group data", error);
+  }
+
+  return data;
 };
 
 export const createUserConnectsGroup = async (
