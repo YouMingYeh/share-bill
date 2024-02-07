@@ -41,3 +41,18 @@ type UserConnectsGroup = {
 };
 
 type UndefinedOrNull = undefined | null | "undefined" | "null";
+
+type Member = {
+  name: string | null;
+  username: string;
+  email: string | null;
+  picture_url: string | null;
+  is_owner: boolean;
+  balance: number;
+};
+
+type Payment = {
+  payer: Member;
+  payee: Member;
+  amount: number;
+};

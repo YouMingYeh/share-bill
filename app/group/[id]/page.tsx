@@ -16,14 +16,6 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // user_connects_group is a subset of group_has_user, so we need to extract the user data from group_has_user if it's not in user_connects_group. Like merge the two arrays.
-type Member = {
-  name: string | null;
-  username: string;
-  email: string | null;
-  picture_url: string | null;
-  is_owner: boolean;
-  balance: number;
-};
 
 export default async function Group({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -62,6 +54,9 @@ export default async function Group({ params }: { params: { id: string } }) {
       });
     }
   });
+
+  // sort members by balance's absolute value
+  members.sort((a, b) => Math.abs(b.balance) - Math.abs(a.balance));
 
   if (!group) {
     return notFound();
@@ -105,7 +100,7 @@ function MyTabs({
         <MemberCard members={members} group_id={group_id} />
       </TabsContent>
       <TabsContent value="summary">
-        <SummaryCard />
+        <SummaryCard members={members} />
       </TabsContent>
     </Tabs>
   );
@@ -203,7 +198,7 @@ function MemberContent({ member }: { member: Member }) {
         variant={member.balance >= 0 ? "secondary" : "destructive"}
         className="absolute top-1 right-1"
       >
-        收支： {member.balance}
+        結餘： {member.balance}
       </Badge>
       <Avatar className=" aspect-square">
         <AvatarImage
@@ -227,16 +222,77 @@ function MemberContent({ member }: { member: Member }) {
   );
 }
 
-function SummaryCard() {
+function SummaryCard({ members }: { members: Member[] }) {
+  const payments = calculatePayments(members);
+  console.log("payments: ", payments);
   return (
     <Card>
       <CardHeader>
         <CardTitle>總覽</CardTitle>
         <CardDescription>這裏列出了你們的群組的總覽。</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2">{/* TODO: Content */}</CardContent>
+      <CardContent className="space-y-2">
+        <CardTitle>誰欠誰錢</CardTitle>
+        <ScrollArea className="h-52 w-full">
+          {payments.map((payment, index) => (
+            <PaymentContent key={index} payment={payment} />
+          ))}
+        </ScrollArea>
+      </CardContent>
       <CardFooter>{/* TODO: Footer */}</CardFooter>
     </Card>
+  );
+}
+
+function PaymentContent({ payment }: { payment: Payment }) {
+  return (
+    <div className="flex items-center space-x-2 justify-around rounded-md border p-6 pr-16 my-1 relative">
+      <Button size="sm" className="absolute top-1 right-1">
+        完成
+      </Button>
+      <div className="flex space-x-2">
+        <Avatar className=" aspect-square">
+          <AvatarImage
+            src={payment.payer.picture_url as string}
+            alt={(payment.payer.username as string).substring(0, 2)}
+          />
+          <AvatarFallback>
+            {(payment.payer.username as string).substring(0, 2)}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1 space-y-1">
+          <p className="text-md font-medium leading-none">
+            {payment.payer.username}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {payment.payer.is_owner ? "擁有者" : "成員"}
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col items-center">
+        <p className="text-lg">欠{payment.amount}元</p>
+        <ThickArrowRightIcon className="w-10 h-10" />
+      </div>
+      <div className="flex space-x-2">
+        <Avatar className=" aspect-square">
+          <AvatarImage
+            src={payment.payee.picture_url as string}
+            alt={(payment.payee.username as string).substring(0, 2)}
+          />
+          <AvatarFallback>
+            {(payment.payee.username as string).substring(0, 2)}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1 space-y-1">
+          <p className="text-md font-medium leading-none">
+            {payment.payee.username}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {payment.payee.is_owner ? "擁有者" : "成員"}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -250,7 +306,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { PlusCircledIcon, ThickArrowRightIcon } from "@radix-ui/react-icons";
 import {
   getUserConnectsGroupByGroupId,
   getUserConnectsGroupByUserId,
@@ -264,6 +320,7 @@ import { SubmitButton } from "@/components/SubmitButton";
 import { Checkbox } from "@/components/ui/checkbox";
 import { revalidatePath } from "next/cache";
 import { Badge } from "@/components/ui/badge";
+import { calculatePayments } from "@/lib/utils";
 
 function MyDrawer() {
   return (
