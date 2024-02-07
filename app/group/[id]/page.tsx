@@ -248,7 +248,7 @@ function PaymentContent({ payment }: { payment: Payment }) {
   return (
     <div className="flex items-center space-x-2 justify-around rounded-md border p-6 pr-16 my-1 relative">
       <Button size="sm" className="absolute top-1 right-1">
-        完成
+        完成付款
       </Button>
       <div className="flex space-x-2">
         <Avatar className=" aspect-square">
