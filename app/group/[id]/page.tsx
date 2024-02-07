@@ -165,14 +165,14 @@ function MemberCard({
           這裏列出你們的群組成員以及他們的帳務狀況。
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2 p-4">
-        <ScrollArea className="h-52">
+      <CardContent className="space-y-2 p-4 flex justify-center">
+        <ScrollArea className="h-52 w-full">
           {members.map((member, index) => (
             <MemberContent key={index} member={member} />
           ))}
         </ScrollArea>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex justify-center">
         <form action={handleAddMember}>
           <input
             className="rounded-md px-4 py-2 bg-inherit border mb-2"
@@ -181,7 +181,7 @@ function MemberCard({
             placeholder="輸入新增成員的名稱"
             required
           />
-          <div className="flex space-x-2 align-middle justify-end">
+          <div className="flex space-x-2 align-middle justify-center">
             <Checkbox id="is_owner" name="is_owner" className="mb-4" />
             <Label htmlFor="is_owner">他也是擁有者？</Label>
           </div>
@@ -198,7 +198,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function MemberContent({ member }: { member: Member }) {
   return (
-    <div className=" flex items-center space-x-2 rounded-md border p-3 my-1 relative">
+    <div className=" flex items-center space-x-2 rounded-md border p-3 my-1 relative ">
       <Badge
         variant={member.balance >= 0 ? "secondary" : "destructive"}
         className="absolute top-1 right-1"

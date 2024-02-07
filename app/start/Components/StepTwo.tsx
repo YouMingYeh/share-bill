@@ -20,7 +20,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getGroup } from "@/utils/supabase/group";
 import { Separator } from "@/components/ui/separator";
 import CopyToClipBoardButton from "@/components/CopyToClipBoardButton";
-import { isStringDefined, translateType } from "@/lib/utils";
+import { defaultUrl, isStringDefined, translateType } from "@/lib/utils";
 
 export async function StepTwo({
   searchParams,
@@ -68,7 +68,7 @@ export async function StepTwo({
                     <h2 className="text-xl">
                       複製群組連結{" "}
                       <CopyToClipBoardButton
-                        url={`share-bill-zeta.vercel.app/group/${group.id}`}
+                        url={`${defaultUrl}/${group.id}`}
                       />
                     </h2>
                   </DrawerDescription>
