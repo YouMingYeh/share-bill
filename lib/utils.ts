@@ -23,7 +23,7 @@ export function translateType(type: string) {
 }
 
 export const defaultUrl = process.env.SITE_URL
-  ? `https://${process.env.SITE_URL}`
+  ? `${process.env.SITE_URL}`
   : "http://localhost:3000";
 
 export function isStringDefined(str: string | undefined | null): boolean {
