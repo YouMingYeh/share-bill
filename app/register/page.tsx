@@ -1,13 +1,10 @@
 import Link from "next/link";
-
 import { SubmitButton } from "@/components/SubmitButton";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-
 import { signUp } from "@/utils/supabase/auth";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-export default function Login({
+export default function Register({
   searchParams,
 }: {
   searchParams: { message: string };
@@ -34,7 +31,6 @@ export default function Login({
         </svg>{" "}
         回首頁
       </Link>
-
       <form
         className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
         action={signUp}
@@ -50,7 +46,6 @@ export default function Login({
           required
           minLength={2}
         />
-
         <label className="text-md" htmlFor="email">
           電子郵件
         </label>
@@ -81,8 +76,7 @@ export default function Login({
             點我登入
           </Link>
         </blockquote>
-
-        {searchParams?.message == "failed" && (
+        {searchParams?.message === "failed" && (
           <Alert variant="destructive">
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>錯誤！</AlertTitle>

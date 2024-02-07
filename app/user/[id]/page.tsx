@@ -1,12 +1,7 @@
 import { getProfile } from "@/utils/supabase/profile";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-
 import { notFound } from "next/navigation";
-
-import { ScrollArea } from "@/components/ui/scroll-area";
-
 import Link from "next/link";
 
 export default async function Group({ params }: { params: { id: string } }) {

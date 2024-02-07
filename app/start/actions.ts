@@ -2,7 +2,6 @@
 
 import { createGroup } from "@/utils/supabase/group";
 import { randomUUID } from "crypto";
-import { create } from "domain";
 import { redirect } from "next/navigation";
 
 export async function submitCreateGroupForm(formData: FormData) {

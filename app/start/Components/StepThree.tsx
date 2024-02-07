@@ -1,6 +1,4 @@
 import * as React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -34,11 +32,8 @@ import {
   getGroupHasUser,
 } from "@/utils/supabase/group_has_user";
 import { Separator } from "@/components/ui/separator";
-import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
-import { toast } from "react-hot-toast";
 import { ConnectForm } from "./ConnectForm";
-import { metadata } from "@/app/layout";
 import { defaultUrl, isStringDefined } from "@/lib/utils";
 
 export async function StepThree({
@@ -116,7 +111,9 @@ const CardTwo = async ({
 }: {
   searchParams: { step: string; groupid: string | undefined };
 }) => {
-  const group_has_users = await getGroupHasUser(searchParams?.groupid);
+  const group_has_users = await getGroupHasUser(
+    searchParams?.groupid as string,
+  );
 
   async function handleAddMember(formData: FormData) {
     "use server";

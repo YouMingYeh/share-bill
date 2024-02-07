@@ -1,7 +1,4 @@
-import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 

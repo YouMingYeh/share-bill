@@ -1,11 +1,7 @@
 "use client";
-
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
 import "@/app/globals.css";
-
 import { Button } from "@/components/ui/button";
 
 export default function Error({

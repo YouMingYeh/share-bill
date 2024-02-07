@@ -33,7 +33,9 @@ export async function ConnectForm({
     data: { user },
   } = await supabase.auth.getUser();
 
-  const user_connects_group = await getUserConnectsGroup(searchParams?.groupid);
+  const user_connects_group = await getUserConnectsGroup(
+    searchParams?.groupid as string,
+  );
 
   let connected = false;
   if (user_connects_group && user_connects_group?.length > 0) {
@@ -47,7 +49,7 @@ export async function ConnectForm({
   const profile: any = user ? await getProfile(user?.id) : {};
 
   const group_has_users = (await getGroupHasUser(
-    searchParams?.groupid,
+    searchParams?.groupid as string,
   )) as GroupHasUser[];
 
   const group_has_usernames = group_has_users.map(

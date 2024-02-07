@@ -2,24 +2,8 @@ import * as React from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-
 import { RocketIcon } from "@radix-ui/react-icons";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
-import { getGroup } from "@/utils/supabase/group";
-import { Separator } from "@/components/ui/separator";
-import CopyToClipBoardButton from "@/components/CopyToClipBoardButton";
 import { isStringDefined } from "@/lib/utils";
 
 export async function StepFour({
@@ -27,8 +11,6 @@ export async function StepFour({
 }: {
   searchParams: { step: string; groupid: string | undefined };
 }) {
-  // const group = await getGroup(searchParams?.groupid as string);
-
   const groupIdExists = isStringDefined(searchParams?.groupid);
 
   return (

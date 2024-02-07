@@ -1,5 +1,3 @@
-import NextPage from "@/components/NextPage";
-import PreviousPage from "@/components/PreviousPage";
 import { Progress } from "@/components/ui/progress";
 import { redirect } from "next/navigation";
 import { StepOne } from "./Components/StepOne";

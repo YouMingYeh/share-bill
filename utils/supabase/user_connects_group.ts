@@ -49,7 +49,7 @@ export const createUserConnectsGroup = async (
   return { data, error };
 };
 
-export const getUserConnectsGroup = async (group_id: string | undefined) => {
+export const getUserConnectsGroup = async (group_id: string) => {
   if (!isStringDefined(group_id)) {
     return null;
   }

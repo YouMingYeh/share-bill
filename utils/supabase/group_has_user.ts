@@ -1,9 +1,8 @@
-import { type } from "os";
 import { createClient } from "./server";
 import { cookies } from "next/headers";
 import { isStringDefined } from "@/lib/utils";
 
-export const getGroupHasUser = async (group_id: string | undefined) => {
+export const getGroupHasUser = async (group_id: string) => {
   if (!isStringDefined(group_id)) {
     return [];
   }
